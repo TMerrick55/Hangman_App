@@ -4,13 +4,10 @@ require_relative 'hangman.rb'
 enable :sessions
 
 get '/' do
-	
 	erb :welcome
-
 end
 
 post '/players' do
-
 	session[:p1] = params[:player1]
 	session[:p2] = params[:player2]
 
@@ -28,13 +25,10 @@ post '/game_prep' do
 	session[:length] = session[:hangman.correct_letters.count]
 
 	redirect '/main_game_hangman'
-
 end
 
 get '/invalid_word_choice' do
-
 	erb :invalid
-
 end
 
 get '/main_game_hangman' do
@@ -61,13 +55,9 @@ post '/make_guess' do
 end
 
 get '/winner' do
-
 	erb :winner
-
 end
 
-get '/lose'
-
+get '/lose' do
 	erb :game_lost
-
 end
