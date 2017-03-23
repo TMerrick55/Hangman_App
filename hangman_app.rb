@@ -16,13 +16,13 @@ post '/players' do
 end
 
 post '/game_prep' do
-	session[:chose_word] = params[:chose_word]
-	session[:hangman] = Hangman.new(session[:chose_word])
-	if session[:hangman].valid_input? == false
+	session[:guess_word] = params[:guess_word]
+	session[:hangman] = Hangman.new(session[:guess_word])
+	if session[:hangman].valid_letter_input? == false
 		redirect '/invalid_word_choice'
 	end
 
-	session[:length] = session[:hangman.correct_letters.count]
+	session[:length] = session[:hangman].correct_letters.count
 
 	redirect '/main_game_hangman'
 end
@@ -39,7 +39,7 @@ get '/main_game_hangman' do
 		redirect '/game_lost'
 	end
 
-	erb :main_game_hangman, :locals => {p1: session[:p1], p2: session[:p2], guess_word: session[:guess_word], correct: session[:correct_letters], length: session[:length], wrong: session[:wrong]}
+	erb :main_game, :locals => {p1: session[:p1], p2: session[:p2], guess_word: session[:guess_word], correct_letters: session[:correct_letters], length: session[:length], wrong: session[:wrong]}
 
 end
 

@@ -9,6 +9,12 @@ class TestHangman < Minitest::Test
 		assert_equal(Array, results.class)	
 	end
 
+	def test_word_is_upcase
+		hangman_object = Hangman.new('salutations')
+		results = hangman_object.word
+		assert_equal('SALUTATIONS', results)
+	end
+
 	def test_array_length_11
 		hangman_object = Hangman.new('Salutations')
 		results = hangman_object.correct_letters
