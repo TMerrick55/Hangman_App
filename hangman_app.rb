@@ -47,8 +47,8 @@ post '/make_guess' do
 	session[:letter] = params[:letter]
 	session[:hangman].guess_letter(session[:letter])
 
-	if session[:hangman].correct.include?('_')
-		redirect '/main_game_hangman'
+	if session[:hangman].wrong_count == 8
+		redirect '/lose'
 	else
 		redirect '/winner'
 	end
