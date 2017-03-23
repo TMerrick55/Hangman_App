@@ -9,7 +9,7 @@ class Hangman
 	end
 
 	def container_array
-		container = Array.new(word.length, '_')
+		container = Array.new(word.length, '_ ')
 	end
 
 	def guess_letter(letter)

@@ -8,8 +8,8 @@ get '/' do
 end
 
 post '/players' do
-	session[:p1] = params[:player1]
-	session[:p2] = params[:player2]
+	session[:p1] = params[:player1_name_input]
+	session[:p2] = params[:player2_name_input]
 
 	erb :choose_word, :locals => {p1: session[:p1], p2: session[:p2]}
 
@@ -35,8 +35,8 @@ get '/main_game_hangman' do
 	session[:correct_letters] = session[:hangman].correct_letters.join
 	session[:wrong] = session[:hangman].wrong_count
 
-	if session[:hangman].wrong_count == 8
-		redirect '/game_lost'
+	if session[:wrong] == 8
+		redirect '/you_lose'
 	end
 
 	erb :main_game, :locals => {p1: session[:p1], p2: session[:p2], guess_word: session[:guess_word], correct_letters: session[:correct_letters], length: session[:length], wrong: session[:wrong]}
@@ -47,10 +47,10 @@ post '/make_guess' do
 	session[:letter] = params[:letter]
 	session[:hangman].guess_letter(session[:letter])
 
-	if session[:hangman].wrong_count == 8
-		redirect '/lose'
-	else
+	if session[:hangman].correct_letters.include?('_ ') == false
 		redirect '/winner'
+	else
+		redirect '/main_game_hangman'
 	end
 end
 
@@ -58,6 +58,7 @@ get '/winner' do
 	erb :winner
 end
 
-get '/lose' do
+get '/you_lose' do
 	erb :game_lost
+	#'Game Over'
 end
