@@ -24,14 +24,14 @@ class TestHangman < Minitest::Test
 	def test_array_elements
 		hangman_object = Hangman.new('Salutations')
 		results = hangman_object.correct_letters
-		assert_equal(['_','_','_','_','_','_','_','_','_','_','_'], results)	
+		assert_equal(['_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ ','_ '], results)	
 	end
 
 	def test_array_correct_guess_A
 		hangman_object = Hangman.new('Salutations')
 		hangman_object.guess_letter('A')
 		results = hangman_object.correct_letters
-		assert_equal(['_','A','_','_','_','A','_','_','_','_','_'], results)	
+		assert_equal(['_ ','A','_ ','_ ','_ ','A','_ ','_ ','_ ','_ ','_ '], results)	
 	end
 
 	def test_array_incorrect_guess_C_wrong_count_1
@@ -45,7 +45,7 @@ class TestHangman < Minitest::Test
 		hangman_object = Hangman.new('Beckon')
 		hangman_object.guess_letter('b')
 		results = hangman_object.correct_letters
-		assert_equal(['B','_','_','_','_','_'], results)
+		assert_equal(['B','_ ','_ ','_ ','_ ','_ '], results)
 	end
 
 	def test_invalid_word_input_false
