@@ -1,11 +1,12 @@
 class Hangman
 
-	attr_accessor :word, :correct_letters, :wrong_count
+	attr_accessor :word, :correct_letters, :wrong_count, :guesses
 
 	def initialize(word)
 		@word = word.upcase
 		@wrong_count = 0
 		@correct_letters = container_array
+		@guesses = []
 	end
 
 	def container_array
@@ -13,6 +14,8 @@ class Hangman
 	end
 
 	def guess_letter(letter)
+		@guesses << letters_guessed
+		@guesses << ', '
 		letter = letter.upcase
 		if word.include?(letter)
 			word.each_char.with_index do |val, pos|
