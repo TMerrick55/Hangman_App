@@ -59,6 +59,8 @@ get '/winner' do
 end
 
 get '/you_lose' do
-	erb :game_lost
-	#'Game Over'
+	
+	word = session[:hangman].word
+
+erb :game_lost, :locals => {word: word}
 end
