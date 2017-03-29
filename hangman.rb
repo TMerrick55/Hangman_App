@@ -13,14 +13,16 @@ class Hangman
 		container = Array.new(word.length, '_ ')
 	end
 
-	def guess_letter(letter)
-		@guesses << letters_guessed
-		@guesses << ', '
-		letter = letter.upcase
-		if word.include?(letter)
-			word.each_char.with_index do |val, pos|
-				if val == letter
-					@correct_letters[pos] = val
+	def guess_letter(letters_guessed)
+		@guesses << letters_guessed.upcase
+		@guesses << ' '
+		letters_guessed = letters_guessed.upcase
+		
+		if word.include?(letters_guessed)
+
+			word.each_char.with_index do |letter, index_pos|
+				if letters_guessed == letter
+					container[index_pos] = letter
 				end
 			end
 		else
@@ -33,6 +35,22 @@ class Hangman
 			false
 		else
 			true
+		end
+	end
+
+	def loser?
+		if wrong_count == 8
+			true
+		else
+			false
+		end
+	end
+
+	def do_not_repeat(repeat_letter)
+		if guesses.include?(repeat_letter)
+			true
+		else
+			false
 		end
 	end
 end

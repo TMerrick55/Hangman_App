@@ -4,6 +4,7 @@ require_relative 'hangman.rb'
 enable :sessions
 
 get '/' do
+	# session[:word] = nil
 	erb :welcome
 end
 
@@ -39,7 +40,7 @@ get '/main_game_hangman' do
 		redirect '/you_lose'
 	end
 
-	erb :main_game, :locals => {p1: session[:p1], p2: session[:p2], guess_word: session[:guess_word], correct_letters: session[:correct_letters], length: session[:length], wrong: session[:wrong]}
+	erb :main_game, :locals => {p1: session[:p1], p2: session[:p2], guess_word: session[:guess_word], correct_letters: session[:correct_letters], length: session[:length], wrong: session[:wrong], guesses: session[:guesses]}
 
 end
 
