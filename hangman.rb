@@ -13,16 +13,14 @@ class Hangman
 		container = Array.new(word.length, '_ ')
 	end
 
-	def guess_letter(letters_guessed)
-		@guesses << letters_guessed.upcase
-		@guesses << ' '
-		letters_guessed = letters_guessed.upcase
+	def guess_letter(letter)
+		letter = letter.upcase
 		
-		if word.include?(letters_guessed)
+		if word.include?(letter)
 
-			word.each_char.with_index do |letter, index_pos|
-				if letters_guessed == letter
-					container[index_pos] = letter
+			word.each_char.with_index do |val, pos|
+				if val == letter
+					@correct_letters[pos] = val
 				end
 			end
 		else
